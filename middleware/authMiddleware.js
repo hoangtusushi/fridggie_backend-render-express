@@ -27,7 +27,7 @@ const authorize = (roles = []) => {
 
     return [
         async (req, res, next) => {
-            const user = await User.findById(req.userId);
+            const user = await User.findById(req.user.id);
             if (!user || (roles.length && !roles.includes(user.role))) {
                 return res.status(403).json({ message: 'Forbidden' });
             }
